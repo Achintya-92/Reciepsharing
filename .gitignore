@@ -13,6 +13,12 @@ dist-ssr
 *.local
 .env
 
+reciepBackend/uploads/
+uploads/
+*.png
+*.jpg
+*.jpeg
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
