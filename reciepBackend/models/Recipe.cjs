@@ -8,7 +8,8 @@ const recipeSchema = new mongoose.Schema({
    instructions:{type:String,required:true},
   preptime:{type:String,required:true},
   cuisineType:{type:String, enum:["Indian","Italian","Chinese","Mexican","Other"],default:"Other"},
-  date: { type: String, default: Date.now }
+  date: { type: String, default: Date.now },
+  likes:{type:Number,default:0},
 });
 
 module.exports = mongoose.model("Recipe", recipeSchema);

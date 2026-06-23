@@ -11,3 +11,13 @@ createRoot(document.getElementById('root')).render(
     <App />
   </StrictMode>,
 )
+// /write a aws deployement file on 
+// /skill.md
+// /security-ageny
+// /jeera ticket
+// /i want to use the pipe drive project
+
+
+//resume 
+//job description
+// optimize the resume for the job description

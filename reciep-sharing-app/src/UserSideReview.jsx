@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 function Review({recipeId}) {
 const[reviews,setReviews]=useState([]);
 useEffect(()=>{
-  fetch(`http://localhost:5000/api/recipe/retrieve/review/${recipeId}`).then(res=>res.json()).then(data=>setReviews(data)).catch(err=>console.error(err));
+  fetch(`${import.meta.env.VITE_API_URL}/api/recipe/retrieve/review/${recipeId}`).then(res=>res.json()).then(data=>setReviews(data)).catch(err=>console.error(err));
 },[recipeId]);
 
  

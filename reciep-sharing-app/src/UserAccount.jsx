@@ -2,19 +2,19 @@ import { useEffect, useState } from "react";
 import UserDetails from "./UserDetails";
 import UserSideReview from "./UserSideReview"
 import { useNavigate , useParams} from "react-router-dom";
-
+import LikeButton from "./LikeButton";
 export default function UserAccount(){
   const{userId} = useParams();
   const[recipes,setRecipes]=useState([]);
   const navigete=useNavigate();
   
 useEffect(()=>{
-    fetch(`http://localhost:5000/api/recipe/author/${userId}`).then(res=>res.json()).then(data=>setRecipes(data)).catch(err=>console.error(err));
+    fetch(`${import.meta.env.VITE_API_URL}/api/recipe/author/${userId}`).then(res=>res.json()).then(data=>setRecipes(data)).catch(err=>console.error(err));
   },[userId]);
 
   function handleDelete(recipeId){
     try {
-       fetch(`http://localhost:5000/api/recipe/delete/${recipeId}`, {
+       fetch(`${import.meta.env.VITE_API_URL}/api/recipe/delete/${recipeId}`, {
         method: "DELETE",
       });
       setRecipes(recipes.filter((recipe) => recipe._id !== recipeId));
@@ -40,7 +40,7 @@ useEffect(()=>{
                <hr />
               <div style={{ overflow: "hidden", height: 220 }}>
               <img
-              src={`http://localhost:5000${recipe.imgSrc}`} 
+              src={`${import.meta.env.VITE_API_URL}${recipe.imgSrc}`} 
               alt={recipe.title} 
               className="card-img-top img-fluid"
               style={{ objectFit: "cover", width: "100%", height: "100%" }}
@@ -54,6 +54,9 @@ useEffect(()=>{
               <h5><b>Cusine Type:</b> {recipe.cuisineType}</h5>
 
               <h6>Date: {recipe.date ? new Date(recipe.date).toLocaleDateString() : "N/A"}</h6>
+              <br/>
+              <LikeButton likes={recipe.likes} recipeId={recipe._id} />
+              <br/>
               <UserSideReview recipeId={recipe._id} />
               <button style={{ backgroundColor: "red"}} onClick={()=> handleDelete(recipe._id)}>Delete</button>
                &nbsp;  &nbsp;  &nbsp;

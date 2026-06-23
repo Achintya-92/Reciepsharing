@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function Review({recipeId}) {
-  console.log(recipeId);
+  // console.log(recipeId);
 const[reviews,setReviews]=useState([]);
 const[review,setReview]=useState("");
 const[email,setEmail]=useState("");
-
+const [expandedReviews, setExpandedReviews] = useState({});
 useEffect(()=>{
-  fetch(`http://localhost:5000/api/recipe/retrieve/review/${recipeId}`).then(res=>res.json()).then(data=>setReviews(data)).catch(err=>console.error(err));
+  fetch(`${import.meta.env.VITE_API_URL}/api/recipe/retrieve/review/${recipeId}`).then(res=>res.json()).then(data=>setReviews(data)).catch(err=>console.error(err));
 },[recipeId]);
 
 const handleSubmit=async(e)=>{
@@ -19,8 +19,8 @@ const handleSubmit=async(e)=>{
       recipeId: recipeId,     
       review: review  
     };
-
-      const response=await fetch(`http://localhost:5000/api/recipe/review/${recipeId}`,{
+     
+      const response=await fetch(`${import.meta.env.VITE_API_URL}/api/recipe/review/${recipeId}`,{
   method:"POST",
   headers: { "Content-Type": "application/json" },
   body:JSON.stringify(newReview),
@@ -28,7 +28,7 @@ const handleSubmit=async(e)=>{
 
     const data=await response.json();
     if (!response.ok) {
-      throw new Error(data.error || "Failed to add blog");
+      throw new Error(data.error || "Failed to add review");
     }
     alert("✅ Review added successfully!");
       setReview("");
@@ -88,8 +88,25 @@ const handleSubmit=async(e)=>{
             <ul className="list-group">
               {reviews.map((r) => (
                 <li key={r._id} className="list-group-item">
-                  <strong>{r.email}</strong>: {r.review}
-                </li>
+                  <strong>{r.email}</strong>: 
+                <p>
+  {expandedReviews[r._id]
+    ? r.review
+    : r.review.slice(0, 50) + "..."}
+</p>
+               <button
+  type="button"
+  onClick={(e) => {
+    e.stopPropagation();
+    setExpandedReviews((prev) => ({
+      ...prev,
+      [r._id]: !prev[r._id],
+    }));
+  }}
+>
+  {expandedReviews[r._id] ? "Show Less" : "Show More"}
+</button>
+              </li>
               ))}
             </ul>
           ) : (

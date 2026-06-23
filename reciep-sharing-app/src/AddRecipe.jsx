@@ -25,9 +25,9 @@ export default function AddRecipe() {
     formData.append("instructions", instructions);
     formData.append("preptime", preptime);
     formData.append("cuisineType", cuisineType);
-    formData.append("date", date);
+    formData.append("date", Date.now());
 
-      const response = await fetch("http://localhost:5000/api/recipe/add", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/recipe/add`, {
         method: "POST",
   headers: {
     "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -35,9 +35,8 @@ export default function AddRecipe() {
         body:formData
   });
         const data =await response.json();
-
     if (!response.ok) {
-      throw new Error(data.error || "Failed to add blog");
+      throw new Error(data.error || "Failed to add Recipe");
     }
     alert("✅ Recipe added successfully!");
     window.location.href = `/userAccount/${userId}`;
@@ -83,7 +82,7 @@ export default function AddRecipe() {
         <textarea
           name="ingredients"
           id="desc"
-          placeholder="Describe your Blog..."
+          placeholder="Describe your Recipe..."
           value={ingredients}
           onChange={(e) => setIngredients(e.target.value)}
           className="form-control mb-2"
@@ -97,7 +96,7 @@ export default function AddRecipe() {
           className="form-control mb-2"
         />
                 <input
-          type="time"
+          type="text"
           name="preptime"
           value={preptime}
           onChange={(e) => setPreptime(e.target.value)}
@@ -113,13 +112,6 @@ export default function AddRecipe() {
           className="form-control mb-2"
         />
 
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          placeholder="Enter Date of posting"
-          className="form-control mb-2"
-        />
         <button type = "submit" className="btn btn-primary">
           Add Recipe
         </button>

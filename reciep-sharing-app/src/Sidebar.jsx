@@ -31,6 +31,8 @@ function Sidebar() {
           <li className="nav-item">
             <Link className="nav-link" to="/signup">Signup</Link>
           </li>
+              <li  className="nav-item"><Link className="dropdown-item" to="/more">more</Link></li>
+
 
           {/* Dropdown */}
           <li className="nav-item dropdown">

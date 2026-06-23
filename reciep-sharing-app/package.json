@@ -5,13 +5,16 @@
   "homepage": "https://Achintya-92.github.io/Reciepsharing/",
   "type": "module",
   "scripts": {
-      "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/free-regular-svg-icons": "^7.2.0",
+    "@fortawesome/free-solid-svg-icons": "^7.2.0",
+    "@fortawesome/react-fontawesome": "^3.3.1",
     "bootstrap": "^5.3.8",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",

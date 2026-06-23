@@ -17,7 +17,7 @@ const navigate=useNavigate();
 useEffect(()=>{
     const fetchRecipe = async () => {
     try 
-    { const res = await fetch(`http://localhost:5000/api/recipe/retrieve/${recipeId}`)
+    { const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipe/retrieve/${recipeId}`)
       const data = await res.json();
      setFormData({
           title: data.title,
@@ -59,7 +59,7 @@ const handleSubmit= async(e)=>{
       if (formData.imgSrc) {
         updateData.append("imgSrc", formData.imgSrc); 
       }
-    const res=await fetch(`http://localhost:5000/api/recipe/update/${recipeId}`,{
+    const res=await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipe/update/${recipeId}`,{
       method:"put",
       body:updateData
     });
