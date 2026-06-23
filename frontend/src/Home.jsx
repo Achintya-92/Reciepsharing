@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import Sidebar from './Sidebar';
+import Sidebar from './Sidebar.jsx';
 import Recipe from "./Recipe.jsx";
 
 export default function Home(){
