@@ -13,8 +13,8 @@ dist-ssr
 *.local
 .env
 
-reciepBackend/uploads/*
-!reciepBackend/uploads/.gitkeep
+Backend/uploads/*
+!Backend/uploads/.gitkeep
 uploads/
 *.png
 *.jpg
